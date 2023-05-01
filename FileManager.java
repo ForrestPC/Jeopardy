@@ -2,6 +2,7 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.nio.charset.StandardCharsets;
@@ -26,8 +27,8 @@ import java.nio.charset.StandardCharsets;
  */
 public class FileManager
 {
-	private String questionFileContents;
-	private String highScoreFileContents;
+	private String questionFileContents = "";
+	private String highScoreFileContents = "";
 	
 	public FileManager()
 	{
@@ -37,18 +38,28 @@ public class FileManager
 	
 	private void readQuestionsFile()
 	{
-		File file = new File("src/Questions.txt");
-		StringBuilder sb = new StringBuilder();
-
-		try (Scanner scanner = new Scanner(file, StandardCharsets.UTF_8.name())) {
-		    while (scanner.hasNextLine()) {
-		        sb.append(scanner.nextLine()).append("\n");
-		    }
+		File file = new File("Questions.txt");
+		try {
+			Scanner scanner = new Scanner(file);
+			while ( scanner.hasNextLine()) {
+				questionFileContents.concat(scanner.nextLine()).concat("\n");
+				//testing if the questions print in terminal
+				System.out.println("hello");
+			}
 		} catch (IOException e) {
-		    JOptionPane.showMessageDialog(null, "Unable to Locate the Questions","ERROR", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Unable to Locate the Questions", "Error", JOptionPane.ERROR_MESSAGE);
 		}
+		// StringBuilder sb = new StringBuilder();
 
-		questionFileContents = sb.toString();
+		// try (Scanner scanner = new Scanner(file, StandardCharsets.UTF_8.name())) {
+		//     while (scanner.hasNextLine()) {
+		//         sb.append(scanner.nextLine()).append("\n");
+		//     }
+		// } catch (IOException e) {
+		//     JOptionPane.showMessageDialog(null, "Unable to Locate the Questions","ERROR", JOptionPane.ERROR_MESSAGE);
+		// }
+
+		// questionFileContents = sb.toString();
 
 	}
 	
