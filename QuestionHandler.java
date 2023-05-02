@@ -48,6 +48,7 @@ public class QuestionHandler
 	
 	public int getHighScore ()
 	{
+		System.out.println(highScoreData[0].toString());
 	     int highScore = Integer.parseInt(highScoreData[1]);
 	     return highScore;
 	}

@@ -2,10 +2,11 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * ---------------------------------------------------------------------------
@@ -39,16 +40,18 @@ public class FileManager
 	private void readQuestionsFile()
 	{
 		File file = new File("Questions.txt");
+		
 		try {
-			Scanner scanner = new Scanner(file);
-			while ( scanner.hasNextLine()) {
-				questionFileContents.concat(scanner.nextLine()).concat("\n");
-				//testing if the questions print in terminal
-				System.out.println("hello");
-			}
+			String read = Files.readString(Path.of("Questions.txt"));
+			questionFileContents = read;
+
 		} catch (IOException e) {
+			System.out.println(e);
 			JOptionPane.showMessageDialog(null, "Unable to Locate the Questions", "Error", JOptionPane.ERROR_MESSAGE);
 		}
+
+		//Forest's version
+
 		// StringBuilder sb = new StringBuilder();
 
 		// try (Scanner scanner = new Scanner(file, StandardCharsets.UTF_8.name())) {
@@ -65,7 +68,7 @@ public class FileManager
 	
 	private void readHighScoreFile()
 	{
-		File file = new File("src/HighScore.txt");
+		File file = new File("HighScore.txt");
 
 		try (Scanner scanner = new Scanner(file, StandardCharsets.UTF_8.name()))
 		{
