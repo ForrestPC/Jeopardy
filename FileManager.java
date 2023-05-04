@@ -40,11 +40,11 @@ public class FileManager
 	private void readQuestionsFile()
 	{
 		File file = new File("Questions.txt");
-		
+
 		try {
 			String read = Files.readString(Path.of("Questions.txt"));
 			questionFileContents = read;
-
+			
 		} catch (IOException e) {
 			System.out.println(e);
 			JOptionPane.showMessageDialog(null, "Unable to Locate the Questions", "Error", JOptionPane.ERROR_MESSAGE);
@@ -110,7 +110,7 @@ public class FileManager
 	public String[][][][] getQuestionsFromFile()
 	{
 	    // Split the raw data into lines
-	    String[] lines = questionFileContents.split("\\r?\\n");
+	    String[] lines = questionFileContents.split("\\r?\\n");	
 
 	    // Initialize the array with known sizes for the first two dimensions
 	    String[][][][] myArray = new String[6][5][10][5];
