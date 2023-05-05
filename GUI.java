@@ -189,7 +189,7 @@ public class GUI extends JFrame
         questionLabel.setForeground(Color.WHITE);
         questionLabel.setOpaque(true);
         questionLabel.setHorizontalAlignment (JLabel.CENTER);
-        questionLabel.setFont(new Font("Arial", Font.BOLD, 100));
+        questionLabel.setFont(new Font("Arial", Font.BOLD, 30));
         questionLabel.setBorder(border);
         panel.add(questionLabel, BorderLayout.CENTER);
 
