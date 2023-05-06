@@ -132,13 +132,13 @@ public class GUI extends JFrame
     	scorePanel.add (scoreLbl);
 	
 	//Rules button
-		JButton rulesBtn = new JButton("Rules");
-		rulesBtn.setBounds(20,30,50,20);
-		scorePanel.add(rulesBtn);
-		rulesBtn.addActionListener(new java.awt.event.ActionListener(){
-			@Override
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				JOptionPane.showMessageDialog(rulesBtn, 
+	JButton rulesBtn = new JButton("Rules");
+	rulesBtn.setBounds(20,30,50,20);
+	scorePanel.add(rulesBtn);
+	rulesBtn.addActionListener(new java.awt.event.ActionListener(){
+		@Override
+		public void actionPerformed(java.awt.event.ActionEvent e) {
+			JOptionPane.showMessageDialog(rulesBtn, 
 				"1. Enter players name. \n"
 				+ "2. Pick a category and point value. \n"
 				+ "3. Read the question and choose the choice you think is correct. \n"
