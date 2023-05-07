@@ -603,6 +603,11 @@ public class GUI extends JFrame {
     	} else {
     		player.subtractPoints(value); // if the answer is incorrect, subtract the value from the player's score
     	}
+    	if (player.getScore() < 0) {
+    	    scoreLbl.setForeground(Color.RED);
+        } else {
+    	    scoreLbl.setForeground(Color.BLACK);
+        }
     	scoreLbl.setText("Score: " + player.getScore()); // update the score label to display the player's current score
     }
 
