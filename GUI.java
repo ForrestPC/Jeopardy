@@ -95,14 +95,52 @@ public class GUI extends JFrame
 
     }
     
-       //Initializes the Main Panel
+   //Initializes the Main Panel
     private void initializeMainPanel()
     {
     	mainPanel = new JPanel(new BorderLayout());
+    	initializeTopRibbon();
+    	mainPanel.add (topRibbonPanel,BorderLayout.NORTH);
     	initializeBoardTable();
     	mainPanel.add(table, BorderLayout.CENTER);
     	initializeScorePanel();
     	mainPanel.add (scorePanel,BorderLayout.SOUTH);
+    }
+    
+    //initializes the Top Ribbon
+    private void initializeTopRibbon()
+    {
+    	topRibbonPanel = new JPanel(new GridLayout(1,2,10,10));
+    	
+    	JButton rulesBtn = new JButton("Rules");
+    	rulesBtn.setBounds(20,30,50,20);
+    	rulesBtn.setBorder (border);
+    	topRibbonPanel.add(rulesBtn);
+    	rulesBtn.addActionListener(new java.awt.event.ActionListener(){
+    		@Override
+    		public void actionPerformed(java.awt.event.ActionEvent e) {
+    			JOptionPane.showMessageDialog(rootPane, 
+    				"1. Enter players name. \n"
+    				+ "2. Pick a category and point value. \n"
+    				+ "3. Read the question and choose the choice you think is correct. \n"
+    				+"4. A dialog box will notify you if your answer is correct or incorrect and add or" 
+    				+ " take away points depending on the outcome. \n"
+    				+"5. Keep going until all options are answered. \n"
+    				+"6. The player with the most points after everything has been answered, wins :)!");
+    			}
+    		});
+    	JButton aboutBtn = new JButton("About");
+    	aboutBtn.setBounds(20,30,50,20);
+    	aboutBtn.setBorder (border);
+    	topRibbonPanel.add(aboutBtn);
+    	aboutBtn.addActionListener(new java.awt.event.ActionListener(){
+    		@Override
+    		public void actionPerformed(java.awt.event.ActionEvent e) {
+    			JOptionPane.showMessageDialog(rootPane, 
+    				"Jeopardy Game\n Creators:\n Oluwaseyi Ariyo\n Kwame Boahene\n Jada Carter\n Forrest Cline\n Tiffany Cusick\n Jeffrey Corrigan\n Troy Davis");
+    			}
+    		});
+    	
     }
     
     //Creates the Score Panel
@@ -131,24 +169,7 @@ public class GUI extends JFrame
     	scorePanel.add (highScoreLbl);
     	scorePanel.add (scoreLbl);
 	
-	//Rules button
-	JButton rulesBtn = new JButton("Rules");
-	rulesBtn.setBounds(20,30,50,20);
-	scorePanel.add(rulesBtn);
-	rulesBtn.addActionListener(new java.awt.event.ActionListener(){
-		@Override
-		public void actionPerformed(java.awt.event.ActionEvent e) {
-			JOptionPane.showMessageDialog(rulesBtn, 
-				"1. Enter players name. \n"
-				+ "2. Pick a category and point value. \n"
-				+ "3. Read the question and choose the choice you think is correct. \n"
-				+"4. A dialog box will notify you if your answer is correct or incorrect and add or" 
-				+ " take away points depending on the outcome. \n"
-				+"5. Keep going until all options are answered. \n"
-				+"6. The player with the most points after everything has been answered, wins :)!");
-			}
-		});
-	}	
+     }	
     
     
     //Creates the Score Panel
@@ -226,38 +247,54 @@ public class GUI extends JFrame
          }
     }
     
-    private JPanel createQuestionPanel(String[] QA) 
-    {
-    	shuffleAnswers(QA);
-    	
-    	JPanel panel = new JPanel(new BorderLayout());
-        JLabel questionLabel = new JLabel(question);
-        questionLabel.setBackground(Color.BLUE);
-        questionLabel.setForeground(Color.WHITE);
-        questionLabel.setOpaque(true);
-        questionLabel.setHorizontalAlignment (JLabel.CENTER);
-        questionLabel.setFont(new Font("Arial", Font.BOLD, 30));
-        questionLabel.setBorder(border);
-        panel.add(questionLabel, BorderLayout.CENTER);
+    // Creates the Question and Answer Panel
+    private JPanel createQuestionPanel(String[] QA) {
+        shuffleAnswers(QA);
+
+        JPanel panel = new JPanel(new BorderLayout());
+
+        JTextPane questionPane = new JTextPane();
+        questionPane.setText(question);
+        questionPane.setBackground(Color.BLUE);
+        questionPane.setForeground(Color.WHITE);
+        questionPane.setFont(new Font("Arial", Font.BOLD, 40));
+        questionPane.setBorder(border);
+
+        // Center the text horizontally
+        StyledDocument doc = questionPane.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
+        // Center the text vertically
+        StyledDocument doc1 = questionPane.getStyledDocument();
+        SimpleAttributeSet vertical = new SimpleAttributeSet();
+        StyleConstants.setAlignment(vertical, StyleConstants.ALIGN_CENTER);
+        StyleConstants.setSpaceAbove(vertical, 0);
+        StyleConstants.setSpaceBelow(vertical, 0);
+        StyleConstants.setLineSpacing(vertical, .2f);
+        Element paragraph = doc1.getParagraphElement(0);
+        doc1.setParagraphAttributes(paragraph.getStartOffset(), paragraph.getEndOffset(), vertical, false);
+
+        panel.add(questionPane, BorderLayout.CENTER);
 
         JPanel answerPanel = new JPanel(new GridLayout(4, 1, 10, 10));
         answerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         answerButtons = new JButton[4];
-        for(int i = 0; i<answerButtons.length;i++)
-        {
-        	answerButtons[i] = new JButton(answers[i]);
-        	answerButtons[i].setFont(new Font("Arial", Font.PLAIN, 36));
+        for (int i = 0; i < answerButtons.length; i++) {
+            answerButtons[i] = new JButton(answers[i]);
+            answerButtons[i].setFont(new Font("Arial", Font.PLAIN, 36));
             answerButtons[i].addActionListener(new BtnClicked());
-        	answerPanel.add(answerButtons[i]);
+            answerPanel.add(answerButtons[i]);
         }
-        
+
         newTimer();
         panel.add(timerLbl, BorderLayout.NORTH);
         panel.add(answerPanel, BorderLayout.SOUTH);
 
         return panel;
-     }
+    }
     
     public void shuffleAnswers(String[] QA)
     {
