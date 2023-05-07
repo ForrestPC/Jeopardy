@@ -136,7 +136,7 @@ public class FileManager
 	        // Add the question and answers to the array
 	        myArray[getCategoryIndex(category)][getValueIndex(value)][currentIndex[getCategoryIndex(category)][getValueIndex(value)]][0] = question;
 	        for (int i = 0; i < answers.length; i++) {
-	            myArray[getCategoryIndex(category)][getValueIndex(value)][currentIndex[getCategoryIndex(category)][getValueIndex(value)]][i+1] = answers[i];
+	            myArray[getCategoryIndex(category)][getValueIndex(value)][currentIndex[getCategoryIndex(category)][getValueIndex(value)]][i+1] = parts[3]+" "+answers[i];
 	        }
 
 	        // Increment the current index for this category and difficulty level
