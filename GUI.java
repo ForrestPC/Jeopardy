@@ -437,34 +437,49 @@ public class GUI extends JFrame
     	}
     }
     
-    private void endGame()
-    {
-    		endGamePanel = new JPanel(new BorderLayout());
-    		checkHighScore(player.getScore ( ));
-    		scorePanel.removeAll ( );
-    		if(newHighScore)
-    		{
-    			scorePanel.add (highScoreNameLbl);
-    			scorePanel.add (highScoreLbl);
-    			highScoreNameLbl.setFont(new Font("Arial", Font.BOLD, 36));
-    			highScoreLbl.setFont(new Font("Arial", Font.BOLD, 36));
-    		}
-    		else
-    		{
-    			scorePanel.add (playerLbl);
-    			scorePanel.add (scoreLbl);
-    			playerLbl.setFont(new Font("Arial", Font.BOLD, 36));
-    			scoreLbl.setFont(new Font("Arial", Font.BOLD, 36));
-    		}
-    		JLabel endofGame = new JLabel("Game Over! Thank you for Playing our Game");
-	    	endofGame.setHorizontalAlignment (JLabel.CENTER);
-	        endofGame.setFont(new Font("Arial", Font.BOLD, 48));
-	    	endGamePanel.add (endofGame, BorderLayout.NORTH);
-	    	endGamePanel.add (scorePanel,BorderLayout.CENTER);
-	    	getContentPane().removeAll();
-	        getContentPane().add(endGamePanel, BorderLayout.CENTER);
-	        revalidate();
-	        repaint();
+  private void endGame() {
+    	JPanel endGameWrapperPanel = new JPanel(new BorderLayout());
+        endGamePanel = new JPanel(new GridLayout(4,1,20,20));
+        
+        JLabel endofGame = new JLabel("Game Over! Thank you for Playing our Game");
+        endofGame.setHorizontalAlignment(JLabel.CENTER);
+        endofGame.setFont(new Font("Arial", Font.BOLD, 48));
+        endGamePanel.add(endofGame);
+        
+        checkHighScore(player.getScore());
+        if(newHighScore) {
+        	JLabel newHighScoreTxt = new JLabel("NEW HIGH SCORE!");
+        	newHighScoreTxt.setHorizontalAlignment(JLabel.CENTER);
+        	newHighScoreTxt.setFont(new Font("Arial", Font.BOLD, 36));
+        	endGamePanel.add (newHighScoreTxt);
+        	endGamePanel.add(highScoreNameLbl);
+        	endGamePanel.add(highScoreLbl);
+            highScoreNameLbl.setFont(new Font("Arial", Font.BOLD, 36));
+            highScoreLbl.setFont(new Font("Arial", Font.BOLD, 36));
+        } else {
+        	endGamePanel.add(playerLbl);
+        	endGamePanel.add(scoreLbl);
+            playerLbl.setFont(new Font("Arial", Font.BOLD, 36));
+            scoreLbl.setFont(new Font("Arial", Font.BOLD, 36));
+        }
+        
+        JButton newGameBtn = new JButton("New Game");
+        newGameBtn.setPreferredSize(new Dimension(100, 50)); // set button size
+        newGameBtn.setBorder (border);
+        newGameBtn.setBackground (Color.GREEN);
+        newGameBtn.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                dispose();
+                new GUI();
+            }
+        });
+        endGameWrapperPanel.add(newGameBtn,BorderLayout.SOUTH);
+        endGameWrapperPanel.add (endGamePanel,BorderLayout.CENTER);
+        getContentPane().removeAll();
+        getContentPane().add(endGameWrapperPanel);
+        revalidate();
+        repaint();
     }
     
 }
