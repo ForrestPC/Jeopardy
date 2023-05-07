@@ -95,7 +95,7 @@ public class GUI extends JFrame
 
     }
     
-    //Initializes the Main Panel
+       //Initializes the Main Panel
     private void initializeMainPanel()
     {
     	mainPanel = new JPanel(new BorderLayout());
@@ -149,6 +149,34 @@ public class GUI extends JFrame
 			}
 		});
 	}	
+    
+    
+    //Creates the Score Panel
+    private void initializeScorePanel()
+    {
+    	scorePanel = new JPanel(new GridLayout(2,2,10,10));
+    	
+    	highScoreLbl = new JLabel(""+questionHandler.getHighScore());
+    	highScoreNameLbl = new JLabel(questionHandler.getHighScoreName());
+    	
+    	playerLbl = new JLabel("Player: ");
+    	scoreLbl = new JLabel("$"+0);
+    	
+    	highScoreLbl.setFont(new Font("Arial", Font.BOLD, 18));
+    	highScoreNameLbl.setFont(new Font("Arial", Font.BOLD, 18));
+    	playerLbl.setFont(new Font("Arial", Font.BOLD, 18));
+    	scoreLbl.setFont(new Font("Arial", Font.BOLD, 18));
+    	
+    	highScoreLbl.setHorizontalAlignment (JLabel.CENTER);
+    	highScoreNameLbl.setHorizontalAlignment (JLabel.CENTER);
+    	playerLbl.setHorizontalAlignment (JLabel.CENTER);
+    	scoreLbl.setHorizontalAlignment (JLabel.CENTER);
+    	
+    	scorePanel.add (highScoreNameLbl);
+    	scorePanel.add (playerLbl);
+    	scorePanel.add (highScoreLbl);
+    	scorePanel.add (scoreLbl);
+	
     }
     private void initializeBoardTable()
     {
