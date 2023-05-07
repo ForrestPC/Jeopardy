@@ -11,29 +11,32 @@ import javax.swing.SwingUtilities;
  */
 
 /**
- * Enter type purpose here
+ * Main class to run the Jeopardy game
  *
  * <hr>
  * Date created: Apr 10, 2023
  * <hr>
- * @author Forrest Cline
+ * 
+ * @author
+ *     Forrest Cline
  */
-public class Main
-{
+public class Main {
 
-	/**
-	 * Enter method description here         
-	 *
-	 * <hr>
-	 * Date created: Apr 10, 2023
-	 *
-	 * <hr>
-	 * @param args
-	 */
-	public static void main(String[] args) {
+    /**
+     * Main method that creates an instance of the GUI object to play the game.
+     *
+     * <hr>
+     * Date created: Apr 10, 2023
+     *
+     * <hr>
+     * 
+     * @param args
+     *     arguments passed to the program (unused)
+     */
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
-           public void run() {
-                new GUI();
+            public void run() {
+                new GUI(); // creates an instance of the GUI
             }
         });
     }
